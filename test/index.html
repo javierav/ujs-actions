@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="simpleujs:baseUrl" content="http://localhost:3000" />
+    <title>SimpleUJS Testing Page</title>
+    <script type="text/javascript" src="simpleujs.dev.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/sinon@8.0.0/pkg/sinon.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/jquery@3.4.1/dist/jquery.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        sinon.stub(window, 'fetch').callsFake(function(url, options) {
+          var config = {
+            status: 404
+          };
+          var body = null;
+
+          if (url == '/test-1') {
+            config.status = 200;
+            config.body = null;
+          }
+
+          if (config.body) {
+            body = new Blob(config.body, {type: 'text/html'});
+          }
+
+          var response = new Response(body, {status: config.status || 200})
+          return Promise.resolve(response);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h2>Basic HTTP actions</h2>
+
+    <div id="test-1">
+      <button type="button" data-su-get-from="/test-1">Get data</button>
+    </div>
+
+    <div id="test-2">
+      <button type="button" data-su-get-from="/test-2?id=2&name=test-2" data-su-params="id=3">
+        Get data with params (should ignore data-params)
+      </button>
+    </div>
+
+    <div id="test-3">
+      <button type="button" data-su-post-to="/test-3">Post data</button>
+    </div>
+
+    <div id="test-4">
+      <button type="button" data-su-post-to="/test-4" data-su-params="id=4&name=test-4">
+        Post data with params
+      </button>
+    </div>
+
+    <div id="test-5">
+      <button type="button" data-su-put-to="/test-5">Put data</button>
+    </div>
+
+    <div id="test-6">
+      <button type="button" data-su-put-to="/test-6" data-su-params="id=6&name=test-6">
+        Put data with params
+      </button>
+    </div>
+
+    <div id="test-7">
+      <button type="button" data-su-patch-to="/test-7">Patch data</button>
+    </div>
+
+    <div id="test-8">
+      <button type="button" data-su-patch-to="/test-8" data-su-params="id=8&name=test-8">
+        Patch data with params
+      </button>
+    </div>
+
+    <div id="test-9">
+      <button type="button" data-su-delete-from="/test-9">Patch data</button>
+    </div>
+
+    <h2>Event scale up</h2>
+
+    <div id="test-10">
+      <div data-su-get-from="/test-10">
+        <button type="button">Get data</button>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+{
+  "name": "ujs-actions",
+  "version": "0.0.0",
+  "description": "A simple unobtrusive JavaScript library using HTML attributes",
+  "repository": "https://github.com/javierav/ujs-actions",
+  "keywords": [
+    "unobtrusive",
+    "ujs",
+    "javascript",
+    "data-behavior",
+    "rails",
+    "rails-ujs",
+    "html",
+    "data"
+  ],
+  "author": {
+    "name": "Javier Aranda",
+    "email": "javier.aranda.varo@gmail.com",
+    "url": "https://github.com/javierav"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "dist/*.js"
+  ],
+  "main": "dist/simpleujs.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.15",
+    "mocha": "^6.2.2",
+    "puppeteer": "^2.0.0",
+    "terser-webpack-plugin": "^2.3.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --watch --content-base dist --content-base test --port 8000",
+    "dist": "webpack",
+    "test": "webpack && mocha test/bootstrap.js --recursive test"
+  }
+}
